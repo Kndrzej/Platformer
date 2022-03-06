@@ -14,4 +14,4 @@ StateMachine
 
 Used programming mnemonics:
 SOLID,
-KISS,
+KISS
