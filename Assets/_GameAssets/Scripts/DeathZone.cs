@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
-   
+
     public delegate void DeathAction();
     public static event DeathAction OnDeath;
 
@@ -13,5 +11,5 @@ public class DeathZone : MonoBehaviour
         OnDeath();
     }
 
-    
+
 }

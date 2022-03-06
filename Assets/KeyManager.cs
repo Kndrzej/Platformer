@@ -1,18 +1,31 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject key;
+    private int deadEnemies = 0;
+    private void OnEnable()
     {
-        
+        Enemy.OnHit += IncrementDeadEnemies;
+    }
+    private void OnDisable()
+    {
+        Enemy.OnHit += IncrementDeadEnemies;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void IncrementDeadEnemies()
     {
-        
+        deadEnemies++;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(CheckEnemiesAlive());
+    }
+    private IEnumerator CheckEnemiesAlive()
+    {
+        yield return new WaitUntil(() => deadEnemies == 3);
+        key.SetActive(true);
     }
 }

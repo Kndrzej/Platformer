@@ -1,11 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public delegate void DeathAction();
     public static event DeathAction OnDeath;
+
+    public delegate void HitEnemy();
+    public static event HitEnemy OnHit;
+
     [SerializeField] private GameObject startPosition, endPosition;
     [SerializeField] private float platformMovementSpeed;
     [SerializeField] private float waitInPlaceTime;
@@ -14,14 +17,15 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player")) OnDeath();
+        if (collision.CompareTag("Player")) OnDeath();
         if (collision.CompareTag("Projectile"))
         {
             gameObject.SetActive(false);
             collision.gameObject.SetActive(false);
+            OnHit();
         }
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
