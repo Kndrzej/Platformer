@@ -5,7 +5,8 @@ Used programming practices:
 Object Pooling,
 Coroutines,
 Events,
-getter setter
+getter setter,
+Guard
 
 Used programming patterns:
 Observer,
