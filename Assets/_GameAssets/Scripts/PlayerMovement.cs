@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        if(GameStateManager.Instance != null) GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
     private void OnDestroy()
     {
