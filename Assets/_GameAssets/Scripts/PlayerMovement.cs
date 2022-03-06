@@ -15,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        if(GameStateManager.Instance != null) GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
     public int maxJumps = 2;
 
@@ -60,4 +65,9 @@ public class PlayerMovement : MonoBehaviour
     {
         return horizontalInput == 0 && grounded == true;
     }
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        enabled = newGameState == GameState.Gameplay;
+    }
+
 }
