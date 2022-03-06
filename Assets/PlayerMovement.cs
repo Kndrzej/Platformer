@@ -16,7 +16,12 @@ public class PlayerMovement : MonoBehaviour
         player = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
+    public int maxJumps = 2;
 
+    public int jumps;
+   
+
+    
     // Update is called once per frame
     void Update()
     {
@@ -26,14 +31,21 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput > 0.01f) transform.localScale = Vector3.one;
         else if (horizontalInput < -0.01f) transform.localScale = new Vector3(-1,1,1);
 
-        if (Input.GetKeyDown(KeyCode.Space) && grounded) Jump();
+        if (Input.GetKeyDown(KeyCode.Space)) Jump();
         animator.SetBool("run", horizontalInput != 0);
     }
     private void Jump()
     {
-        player.velocity = new Vector2(player.velocity.x, jumpSpeed);
-        animator.SetBool("grounded", false);
-        grounded = false;
+        if (jumps > 0)
+        {
+            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+            grounded = false;
+            jumps = jumps - 1;
+        }
+        if (jumps == 0)
+        {
+            return;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -41,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("grounded", true);
             grounded = true;
+            jumps = maxJumps;
         }
     }
     public bool CanAttack()
