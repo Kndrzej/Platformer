@@ -4,11 +4,13 @@ This is project I made as a recruitment task
 Used programming practices:
 Object Pooling,
 Coroutines,
-Events
+Events,
+getter setter
 
 Used programming patterns:
 Observer,
 Singleton,
+StateMachine
 
 Used programming mnemonics:
 SOLID,
