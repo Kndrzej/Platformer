@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
 
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Z) && cooldownTimer>attackCooldown &&playerMovement.CanAttack()) Attack();
 
